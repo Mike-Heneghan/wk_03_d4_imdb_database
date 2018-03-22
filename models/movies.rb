@@ -59,9 +59,18 @@ class Movie
   end
 
   def movie_star()
-    # sql
+    sql = "
+      SELECT stars.*
+	    FROM stars
+	    INNER JOIN castings
+	    ON castings.star_id = star.id
+	    WHERE movie_id = $1;"
+
+      values = [@id]
     # Find the artist object based on the star_id using castings as the bridge.
-    #
+    result = SqlRunner.run(sql, values)
+    movie_star_object = result.map { |star| Star.new(star)  }
+  
   end
 
 end

@@ -38,3 +38,5 @@ casting1.update()
 
 p Casting.all()
 puts ""
+
+p movie1.movie_star()
