@@ -40,3 +40,6 @@ p Casting.all()
 puts ""
 
 p movie1.movie_star()
+puts ""
+p star1.stars_movies()
+puts ""

@@ -70,7 +70,6 @@ class Movie
     # Find the artist object based on the star_id using castings as the bridge.
     result = SqlRunner.run(sql, values)
     movie_star_object = result.map { |star| Star.new(star)  }
-
   end
 
 end
