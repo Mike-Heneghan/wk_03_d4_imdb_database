@@ -3,7 +3,7 @@ require_relative("movies")
 
 class Star
 
-  attr_accessor :first_name :last_name
+  attr_accessor :first_name, :last_name
   attr_reader :id
 
     def initialize( options )
@@ -20,6 +20,40 @@ class Star
 
       result = SqlRunner.run(sql,values)
       @id = result[0]['id']
-      
+
     end
+
+    def self.all()
+      sql = "
+      SELECT * FROM stars;"
+
+      result = SqlRunner.run(sql)
+      star_objects = result.map { |star_hash| Star.new(star_hash) }
+      return star_objects
+
+    end
+
+    def self.delete_all
+      sql = "
+      DELETE FROM stars;"
+
+      result = SqlRunner.run(sql)
+    end
+
+    def delete()
+      sql = "
+      DELETE FROM stars"
+      result = SqlRunner.run(sql)
+    end
+
+    def update()
+      sql = "
+      UPDATE stars SET (first_name, last_name) = ($1, $2) WHERE id = $3"
+
+      values = [@first_name, @last_name, @id]
+
+      result = SqlRunner.run(sql, values)
+
+    end
+
 end
